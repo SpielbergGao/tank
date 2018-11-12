@@ -144,11 +144,9 @@ class Tank(BaseItem):
         self.direction = "D"  # 代表坦克的方向,默认方向往下(上下左右)
         self.speed = 5  # 坦克移动的速度
         self.stop = False
-        self.images = {}  # 坦克的所有图片,key:方向 value: 图片(surface)
-        self.images["L"] = pygame.image.load("images/tankL.gif")
-        self.images["R"] = pygame.image.load("images/tankR.gif")
-        self.images["U"] = pygame.image.load("images/tankU.gif")
-        self.images["D"] = pygame.image.load("images/tankD.gif")
+        self.images = {"L": pygame.image.load("images/tankL.gif"), "R": pygame.image.load("images/tankR.gif"),
+                       "U": pygame.image.load("images/tankU.gif"),
+                       "D": pygame.image.load("images/tankD.gif")}  # 坦克的所有图片,key:方向 value: 图片(surface)
         self.image = self.images[self.direction]  # 坦克的图片由方向决定
         self.rect = self.image.get_rect()  # 获得图片的边界
         self.rect.left = left  # 拿到x坐标
@@ -197,7 +195,6 @@ class My_Tank(Tank):
             self.live = False
             explode = Explode(self.screem, self.rect)
             TankMain.explode_list.append(explode)
-
 
 class Enemy_Tank(Tank):
     def __init__(self, screem):
@@ -252,11 +249,8 @@ class Missile(BaseItem):
         self.tank = tank
         self.direction = tank.direction  # 子弹的方向由所发射的坦克方向决定
         self.speed = 12  # 子弹移动的速度
-        self.images = {}
-        self.images["L"] = pygame.image.load("images/missileL.gif")
-        self.images["R"] = pygame.image.load("images/missileR.gif")
-        self.images["U"] = pygame.image.load("images/missileU.gif")
-        self.images["D"] = pygame.image.load("images/missileD.gif")
+        self.images = {"L": pygame.image.load("images/missileL.gif"), "R": pygame.image.load("images/missileR.gif"),
+                       "U": pygame.image.load("images/missileU.gif"), "D": pygame.image.load("images/missileD.gif")}
         self.image = self.images[self.direction]  # 坦克的图片由方向决定
         self.rect = self.image.get_rect()  # 获得图片的边界
         self.rect.left = tank.rect.left + (tank.width - self.width) / 2  # 拿到子弹的中心点
@@ -304,16 +298,16 @@ class Explode(BaseItem):
     def __init__(self, screem, rect):
         super().__init__(screem)
         self.live = True
-        self.images = [pygame.image.load("images/0.gif"), \
-                       pygame.image.load("images/1.gif"), \
-                       pygame.image.load("images/2.gif"), \
-                       pygame.image.load("images/3.gif"), \
-                       pygame.image.load("images/4.gif"), \
-                       pygame.image.load("images/5.gif"), \
-                       pygame.image.load("images/6.gif"), \
-                       pygame.image.load("images/7.gif"), \
-                       pygame.image.load("images/8.gif"), \
-                       pygame.image.load("images/9.gif"), \
+        self.images = [pygame.image.load("images/0.gif"),
+                       pygame.image.load("images/1.gif"),
+                       pygame.image.load("images/2.gif"),
+                       pygame.image.load("images/3.gif"),
+                       pygame.image.load("images/4.gif"),
+                       pygame.image.load("images/5.gif"),
+                       pygame.image.load("images/6.gif"),
+                       pygame.image.load("images/7.gif"),
+                       pygame.image.load("images/8.gif"),
+                       pygame.image.load("images/9.gif"),
                        pygame.image.load("images/10.gif")]
         self.step = 0
         self.rect = rect  # 爆炸的位置和发生爆炸前,子弹碰倒坦克位置一样,在构建爆炸的时候把坦克的rect传递进来
